@@ -1,5 +1,5 @@
 const base = require('./service/base')
-const userService = require('./model/user')
+const userService = require('./service/userService')
 
 exports.test = base.test;
 

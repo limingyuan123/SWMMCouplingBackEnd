@@ -1,5 +1,5 @@
 const mongoose = require('../lib/mongodb')
-const DB = require('../config/config')
+const DB = require('../lib/mongodb')
 
 let dataSchema = new mongoose.mongoose.Schema({
     uid:String,
@@ -11,5 +11,5 @@ let dataSchema = new mongoose.mongoose.Schema({
     collection:'user'
 })
 
-let user = DB.db.model('user', dataSchema);
+let user = DB.DB.model('user', dataSchema);
 exports.User = user;

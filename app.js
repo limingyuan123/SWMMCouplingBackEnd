@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const router = require('./router');
 const config = require('./config/config')
-const mongodb = require('./lib/mongodb')
+const mongodb = require('./lib/mongodb')//require 返回的其实是module.exports,例如这个mongodb，可以包含多个exports，需要哪一个exports就用.来获取即可
 let server = require('http').createServer(app);
 let io = require('socket.io')(server);
 

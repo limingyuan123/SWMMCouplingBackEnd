@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-const port = '8086';
 const router = require('./router');
+const config = require('./config/config')
+const mongodb = require('./lib/mongodb')
+let server = require('http').createServer(app);
+let io = require('socket.io')(server);
 
 app.get('/test',router.test);
 
@@ -17,7 +20,7 @@ app.all('*', function (req, res, next) {
     else next();
 });
 
-let serve = app.listen(port,()=>{
-    console.log(`app is start success and it's post is ${port}`);
+let serve = app.listen(config.port,()=>{
+    console.log(`app start success and it's post is ${config.port}`);
     console.log(`the serve address is ${serve.address().address} and the port is ${serve.address().port}`);
 });

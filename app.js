@@ -8,6 +8,8 @@ let io = require('socket.io')(server);
 
 app.get('/test',router.test);
 
+app.post('/testUser', router.testUser);
+
 //CORS跨域设置
 app.all('*', function (req, res, next) {
     // res.header("Access-Control-Allow-Origin", "http://localhost:1708");

@@ -27,15 +27,6 @@ exports.inpRead  = (req, res, next)=>{
                     let str = fs.readFileSync(dirPath + '/' + files[i]).toString();
                     let geojson = JSON.parse(str);
                     res.send({code:0, message:{geojson:geojson}});
-
-                    // fs.readFile(dirPath +'/' + files[i], (err, data)=>{
-                    //     if(err) throw err;
-                    //     let test = '' + data;
-                    //     test = JSON.stringify(test);
-                    //     let geojson = JSON.stringify(data);
-                    //     res.send({code:0, message:{geojson:geojson}});
-                    //     return;
-                    // })
                 }
             })
         })

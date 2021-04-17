@@ -31,3 +31,13 @@ let serve = app.listen(config.port,()=>{
     console.log(`app start success and it's post is ${config.port}`);
     console.log(`the serve address is ${serve.address().address} and the port is ${serve.address().port}`);
 });
+
+//错误捕捉
+app.use(function (err, req, res, next) {
+    // console.error(err.stack)
+    res.status(500).send('server error')
+})
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught Exception:' + err);//直接捕获method()未定义函数，Node进程未被退出。
+});

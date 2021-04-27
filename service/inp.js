@@ -93,6 +93,7 @@ exports.operationInp = function(dirPath, res){
                     .then(geoTrans)
                     // .then(mergeJson)
                     .then((path)=>{
+                        //setTimeout设置对setInterval的超时清除
                         const intervalObj = setInterval(()=>{
                             fs.readdir(path, (err, files) => {
                                 if(files.length === 4){
@@ -126,7 +127,13 @@ exports.operationInp = function(dirPath, res){
                                 }
                               });
                         }, 500);
-                        intervalObj();
+                        // intervalObj();
+
+                        setTimeout(()=>{
+                            clearInterval(intervalObj);
+                            res.send({code:-1,message:'merge json timeout!'});
+                        }, 10000)
+
 
                         // fs.readdir(path, (err,files)=>{
                         //     if(err) throw err;

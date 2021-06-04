@@ -9,3 +9,5 @@ exports.testUser = userService.testUser;
 exports.testBack = base.testBack;
 //读取inp数据
 exports.inpRead = inp.inpRead;
+//读取展示数据
+exports.getDispVal = base.getDispVal;

@@ -15,6 +15,8 @@ app.get('/testBack', router.testBack);
 //读取inp数据
 app.post('/inp', router.inpRead);
 
+app.post('/getDispVal', router.getDispVal);
+
 //CORS跨域设置
 app.all('*', function (req, res, next) {
     // res.header("Access-Control-Allow-Origin", "http://localhost:1708");

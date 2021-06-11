@@ -22,3 +22,25 @@ exports.testUser = (req,res,next)=>{
         })
     })
 }
+
+// for(let key in dispUrls){
+//     let promise = new Promise((resolve, reject)=>{
+//         request(dispUrls[key], (err, response, data) => {
+//             if (!err && response.statusCode === 200) {
+//                 console.log('suc');
+//                 dispArr.push(response.body);
+//                 resolve("suc")
+//             } else {
+//                 console.log('err')
+//                 reject(err);
+//             }
+//         })
+//     })
+//     promises.push(promise);
+// }
+// Promise.all(promises).then((val)=>{
+//     console.log('promise all is over.');
+// })
+// Promise.race(promises).then((val)=>{
+//     console.log('promise all is over.');
+// })

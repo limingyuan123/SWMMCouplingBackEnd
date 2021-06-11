@@ -137,37 +137,33 @@ exports.operationInp1 = function(dirPath, res){
                         function mergeFuc(){
                             return new Promise((resolve, reject)=>{
                                 // console.log(path)
-                                fs.readdir(out3Path, (err, files) => {
-                                    if(files.length === 4){
-                                        // console.log(intervalObj);
-                                        // clearInterval(intervalObj);
-                                        fs.readdir(out3Path, (err,files)=>{
-                                            if(err) throw err;
-                
-                                            if(files.length === 0){
-                                                res.send({code:-1,message:'inp operation err!4'});
-                                                return;
-                                            }
-                                            let str = '',geojson;
-                                            let resJSONObj = [];
-                                            for(let i=0;i<files.length;i++){
-                                                str = fs.readFileSync(out3Path+files[i]).toString();
-                                                geojson = JSON.parse(str);
-                                                resJSONObj = resJSONObj.concat(geojson.features);
-                                            }
-                                            console.log('suc');
-                                            //将数据传回前台
-                                            let obj = {
-                                                "type": "FeatureCollection",
-                                                "features":undefined
-                                            };
-                                            obj.features = resJSONObj;
-                                            // res.send({code:0, message:'suc', data:obj});
-                                            // return obj;
-                                            resolve(obj);
-                                        })
+                                // fs.readdir(out3Path, (err, files) => {
+                                //     if(files.length === 4){
+                                fs.readdir(out3Path, (err,files)=>{
+                                    if(err) throw err;
+        
+                                    if(files.length === 0){
+                                        res.send({code:-1,message:'inp operation err!4'});
+                                        return;
                                     }
-                                });
+                                    let str = '',geojson;
+                                    let resJSONObj = [];
+                                    for(let i=0;i<files.length;i++){
+                                        str = fs.readFileSync(out3Path+files[i]).toString();
+                                        geojson = JSON.parse(str);
+                                        resJSONObj = resJSONObj.concat(geojson.features);
+                                    }
+                                    console.log('suc');
+                                    //将数据传回前台
+                                    let obj = {
+                                        "type": "FeatureCollection",
+                                        "features":undefined
+                                    };
+                                    obj.features = resJSONObj;
+                                    resolve(obj);
+                                })
+                                    // }
+                                // });
                             })   
                         }
 

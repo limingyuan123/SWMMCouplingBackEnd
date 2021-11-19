@@ -27,30 +27,85 @@ exports.getDispVal = (req, res, next) => {
         let dispArr = [];
         let promises = [];
         let count = 0;
-        for(let key in dispUrls){
-            let promise = new Promise((resolve, reject)=>{
-                request(dispUrls[key], (err, response, data) => {
-                    if (!err && response.statusCode === 200) {
-                        console.log('suc');
-                        let obj = {
-                            count:response.body
-                        }
-                        dispArr.push(obj);                        
-                        resolve(count++)
-                    } else {
-                        console.log('err')
-                        reject(err);
+        //利用async + await实现同时请求url并顺序拿到结果
+        const countArr = dispUrls.map(async url =>{
+            request(url, (err, response, data) => {
+                if (!err && response.statusCode === 200) {
+                    console.log('suc');
+                    let obj = {
+                        count:response.body
                     }
-                })
+                    dispArr.push(obj);
+                    resolve(count++)
+                } else {
+                    console.log('err')
+                    reject(err);
+                }
             })
-            promises.push(promise);
-        }
-        Promise.all(promises).then((val)=>{
-            console.log('promise all is over.');
-            res.send({code:0, message:'suc', data:dispArr});
         })
+        for(const count of countArr){
+            console.log(count);
+        }
+        // for(let key in dispUrls){
+        //     let promise = new Promise((resolve, reject)=>{
+        //         request(dispUrls[key], (err, response, data) => {
+        //             if (!err && response.statusCode === 200) {
+        //                 console.log('suc');
+        //                 let obj = {
+        //                     count:response.body
+        //                 }
+        //                 dispArr.push(obj);
+        //                 resolve(count++)
+        //             } else {
+        //                 console.log('err')
+        //                 reject(err);
+        //             }
+        //         })
+        //     })
+        //     promises.push(promise);
+        // }
+        // Promise.all(promises).then((val)=>{
+        //     console.log('promise all is over.');
+        //     res.send({code:0, message:'suc', data:dispArr});
+        // })
         // Promise.race(promises).then((val)=>{
         //     console.log('promise race is over.');
         // })
     })
 }
+
+
+// exports.getDispVal = (req, res, next) => {
+//     let form = new Formidable.IncomingForm();
+//     form.parse(req, (err, fields, files) => {
+//         let dispUrls = JSON.parse(fields.dispUrls);
+//         let dispArr = [];
+//         let promises = [];
+//         let count = 0;
+//         for(let key in dispUrls){
+//             let promise = new Promise((resolve, reject)=>{
+//                 request(dispUrls[key], (err, response, data) => {
+//                     if (!err && response.statusCode === 200) {
+//                         console.log('suc');
+//                         let obj = {
+//                             count:response.body
+//                         }
+//                         dispArr.push(obj);
+//                         resolve(count++)
+//                     } else {
+//                         console.log('err')
+//                         reject(err);
+//                     }
+//                 })
+//             })
+//             promises.push(promise);
+//         }
+//         Promise.all(promises).then((val)=>{
+//             console.log('promise all is over.');
+//             res.send({code:0, message:'suc', data:dispArr});
+//         })
+//         // Promise.race(promises).then((val)=>{
+//         //     console.log('promise race is over.');
+//         // })
+//     })
+// }

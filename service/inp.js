@@ -34,7 +34,6 @@ exports.operationInp1 = function(dirPath, res){
             return;
         }
 
-
         let inpPath = dirPath + '/' + files[0];
         let shpOutPath = dirPath + '/out1';
         fs.mkdir(shpOutPath,(err)=>{
